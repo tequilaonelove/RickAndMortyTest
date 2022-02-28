@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,6 +40,7 @@ dependencies {
     implementation(Deps.ANDROID_APP_COMPAT)
     implementation(Deps.ANDROID_CORE_KTX)
 
+    hilt()
     implementation(Deps.TIMBER)
 
 }
