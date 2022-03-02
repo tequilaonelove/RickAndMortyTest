@@ -3,6 +3,8 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlinx-serialization")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -41,6 +43,20 @@ dependencies {
     implementation(Deps.ANDROID_CORE_KTX)
 
     hilt()
+    retrofit()
+    viewBindingDelegate()
+    lifecycle()
+
+    implementation(Deps.COIL)
+    implementation(Deps.ANDROID_PAGING_RUNTIME)
+
+    // Navigation Component
+    implementation(Deps.ANDROID_NAVIGATION_UI_KTX)
+    implementation(Deps.ANDROID_NAVIGATION_FRAGMENT_KTX)
+
+    implementation(Deps.OKHTTP3)
+    implementation(Deps.OKHTTP_LOGGER)
+    implementation(Deps.KOTLINX_SERIALIZATION)
     implementation(Deps.TIMBER)
 
 }

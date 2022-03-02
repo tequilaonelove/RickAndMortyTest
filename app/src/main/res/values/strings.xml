@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">RickAndMortyTest</string>
+    <string name="app_name">Rick And Morty App</string>
+    <string name="error_message_retry_again_later">Произошла ошибка, попробуйте позже</string>
+    <string name="retry_text">Повторить</string>
 </resources>

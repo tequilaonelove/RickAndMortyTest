@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/CharactersFragment">
+
+    <fragment
+        android:id="@+id/CharactersFragment"
+        android:name="com.example.rickandmortytest.ui.characters.CharactersFragment"
+        android:label="Characters">
+        <action
+            android:id="@+id/action_CharactersFragment_to_CharacterDetailsFragment"
+            app:destination="@id/CharacterDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/CharacterDetailsFragment"
+        android:name="com.example.rickandmortytest.ui.details.CharacterDetailsFragment"
+        android:label="Character Details">
+        <action
+            android:id="@+id/action_CharacterDetailsFragment_to_EpisodesFragment"
+            app:destination="@id/EpisodesFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/EpisodesFragment"
+        android:name="com.example.rickandmortytest.ui.episodes.EpisodesFragment"
+        android:label="Episodes">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
