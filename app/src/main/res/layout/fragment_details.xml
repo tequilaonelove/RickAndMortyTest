@@ -95,8 +95,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/card_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_view"
-                tools:ignore="TextContrastCheck" />
+                app:layout_constraintTop_toBottomOf="@id/card_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,8 +104,8 @@
     <ProgressBar
         android:id="@+id/progress"
         style="@android:style/Widget.Material.ProgressBar"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
         android:visibility="gone" />
 

@@ -1,27 +1,28 @@
 package com.example.rickandmortytest.data.network
 
-import com.example.rickandmortytest.data.internal.toCharacter
-import com.example.rickandmortytest.data.model.Character
+import com.example.rickandmortytest.data.internal.toEpisode
+import com.example.rickandmortytest.data.model.Episode
 import retrofit2.HttpException
 import javax.inject.Inject
 
-class CharacterDetailsSource @Inject constructor(
-    private val characterService: CharacterService
+class EpisodesSource @Inject constructor(
+    private val episodeService: EpisodeService
 ) {
 
-    suspend fun getSingleCharacter(id: Int): Character {
+    suspend fun getEpisodes(id: String): List<Episode> {
         return try {
-            val response = characterService.getSingleCharacter(id)
+            val response = episodeService.getEpisodes(id)
             if (response.isSuccessful) {
                 val res = response.body()
-                res!!.toCharacter()
+                res!!.map { it.toEpisode() }
             } else {
                 throw HttpException(response)
             }
         } catch (e: HttpException) {
             throw e
         } catch (e: Exception) {
-           throw e
+            throw e
         }
     }
+
 }

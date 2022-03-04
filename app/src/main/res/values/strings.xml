@@ -6,4 +6,6 @@
     <string name="characters_details_title">О персонаже</string>
     <string name="episodes_title">Серии</string>
     <string name="title_list_episodes">Список эпизодов</string>
+    <string name="by_name">По названию</string>
+    <string name="by_date">По дате выхода</string>
 </resources>

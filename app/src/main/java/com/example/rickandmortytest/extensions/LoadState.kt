@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.extensions
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -20,15 +21,14 @@ fun Fragment.showErrorSnackbar(loadStates: CombinedLoadStates, onExecute: (() ->
     }
 }
 
-fun Fragment.showErrorSnackbar(message: String?, onExecute: (() -> Unit)? = null) {
+fun Fragment.showErrorSnackbar(view: View, message: String?, onExecute: (() -> Unit)? = null) : Snackbar {
     val text = message ?: getString(R.string.error_message_retry_again_later)
-    Snackbar.make(requireView(), text, Snackbar.LENGTH_INDEFINITE)
+    return Snackbar.make(view, text, Snackbar.LENGTH_INDEFINITE)
         .setAction(getString(R.string.retry_text)) { onExecute?.invoke() }
-        .show()
 }
 
 internal fun CombinedLoadStates.asErrorMessage(): String? {
-    return (refresh as LoadState.Error).error.message
-        ?: (prepend as LoadState.Error).error.message
-        ?: (append as LoadState.Error).error.message
+    return (refresh as? LoadState.Error)?.error?.message
+        ?: (prepend as? LoadState.Error)?.error?.message
+        ?: (append as? LoadState.Error)?.error?.message
 }

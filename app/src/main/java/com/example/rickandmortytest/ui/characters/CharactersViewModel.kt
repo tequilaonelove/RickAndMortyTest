@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import com.example.rickandmortytest.data.model.Character
 import com.example.rickandmortytest.data.network.CharacterPagingSource
 import com.example.rickandmortytest.data.network.CharacterService
-import com.example.rickandmortytest.extensions.launchAsync
+import com.example.rickandmortytest.extensions.launchPageAsync
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -39,7 +39,7 @@ class CharactersViewModel @Inject internal constructor(
         )
     }
 
-    fun getCharacters() = launchAsync({
+    fun getCharacters() = launchPageAsync({
         getPager().flow
     }, onSuccess = { flow ->
         _charactersFlow = flow

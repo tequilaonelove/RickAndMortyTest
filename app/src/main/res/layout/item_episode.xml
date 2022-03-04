@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dimen_10"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?selectableItemBackground"
+    app:cardBackgroundColor="@color/card_view_background"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimen_5">
+
+        <TextView
+            android:id="@+id/name"
+            style="@style/LaunchTheme.TextAppearanceTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:elegantTextHeight="true"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:minLines="2"
+            android:paddingStart="@dimen/dimen_5"
+            android:paddingEnd="@dimen/dimen_5"
+            android:textAlignment="inherit"
+            tools:text="@tools:sample/lorem/random" />
+
+        <View
+            android:id="@+id/divider3"
+            android:layout_width="1dp"
+            android:layout_height="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/date"
+            style="@style/LaunchTheme.TextAppearanceBodySmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elegantTextHeight="true"
+            android:minEms="10"
+            android:maxEms="11"
+            android:maxLines="1"
+            tools:text="Septebmer 24, 2014" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
