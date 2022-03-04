@@ -1,8 +1,6 @@
 package com.example.rickandmortytest.ui.characters
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +8,16 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.data.model.Character
 import com.example.rickandmortytest.databinding.ItemCharacterBinding
 
-class CharacterAdapter (context: Context) : PagingDataAdapter<Character, CharacterAdapter.CharacterViewHolder>(CharacterDiffItemCallback) {
+class CharacterAdapter(context: Context) :
+    PagingDataAdapter<Character, CharacterAdapter.CharacterViewHolder>(CharacterDiffItemCallback) {
+
+    var characterClickListener: CharacterClickListener? = null
 
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -31,26 +33,37 @@ class CharacterAdapter (context: Context) : PagingDataAdapter<Character, Charact
 
         private val viewBinding by viewBinding(ItemCharacterBinding::bind)
 
+        init {
+            itemView.setOnClickListener {
+                characterClickListener?.onCharacterClicked(
+                    getItem(absoluteAdapterPosition) as Character
+                )
+            }
+        }
+
         fun bind(character: Character?) {
             with(viewBinding) {
-                image.load(character?.image) {
-                    crossfade(300)
-                    placeholder(ColorDrawable(Color.TRANSPARENT))
-                }
+                Glide.with(itemView)
+                    .load(character?.image)
+                    .transition(withCrossFade().crossFade(500))
+                    .into(image)
                 name.text = character?.name
             }
         }
     }
 
-}
-
-private object CharacterDiffItemCallback : DiffUtil.ItemCallback<Character>() {
-
-    override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
-        return oldItem == newItem
+    interface CharacterClickListener {
+        fun onCharacterClicked(character: Character)
     }
 
-    override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
-        return oldItem.name == newItem.name
+    object CharacterDiffItemCallback : DiffUtil.ItemCallback<Character>() {
+
+        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+            return oldItem == newItem
+        }
+
+        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
+            return oldItem.name == newItem.name && oldItem.image == newItem.image
+        }
     }
 }

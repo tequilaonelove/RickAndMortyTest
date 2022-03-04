@@ -41,13 +41,16 @@ dependencies {
     implementation(Deps.ANDROID_RECYCLERVIEW)
     implementation(Deps.ANDROID_APP_COMPAT)
     implementation(Deps.ANDROID_CORE_KTX)
+    implementation(Deps.ANDROID_ACTIVITY_KTX)
+    implementation(Deps.ANDROID_FRAGMENT_KTX)
 
     hilt()
     retrofit()
     viewBindingDelegate()
     lifecycle()
 
-    implementation(Deps.COIL)
+    implementation(Deps.GLIDE)
+    kapt(Deps.GLIDE_COMPILER)
     implementation(Deps.ANDROID_PAGING_RUNTIME)
 
     // Navigation Component

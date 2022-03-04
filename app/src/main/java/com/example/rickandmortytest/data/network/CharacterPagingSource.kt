@@ -2,8 +2,8 @@ package com.example.rickandmortytest.data.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.rickandmortytest.data.model.Character
 import com.example.rickandmortytest.data.internal.toCharacter
+import com.example.rickandmortytest.data.model.Character
 import retrofit2.HttpException
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class CharacterPagingSource @Inject internal constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         try {
             val pageNumber = params.key ?: INITIAL_PAGE_NUMBER
-            val response = characterService.character(page = pageNumber)
+            val response = characterService.getAllCharacters(page = pageNumber)
             return if (response.isSuccessful) {
 
                 val res = response.body()

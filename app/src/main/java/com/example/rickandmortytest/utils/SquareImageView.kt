@@ -3,10 +3,8 @@ package com.example.rickandmortytest.utils
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
-import com.example.rickandmortytest.R
 
-class SquareShadowImageView : AppCompatImageView {
+open class SquareImageView : AppCompatImageView {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -15,10 +13,6 @@ class SquareShadowImageView : AppCompatImageView {
         attrs,
         defStyle
     )
-
-    init {
-        foreground = ContextCompat.getDrawable(context, R.drawable.shadow_background)
-    }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)

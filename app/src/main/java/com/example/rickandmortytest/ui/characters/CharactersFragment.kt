@@ -5,20 +5,21 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
+import com.example.rickandmortytest.data.model.Character
 import com.example.rickandmortytest.databinding.FragmentCharactersBinding
+import com.example.rickandmortytest.extensions.launchOnLifecycleScope
 import com.example.rickandmortytest.extensions.showErrorSnackbar
+import com.example.rickandmortytest.ui.details.CharacterDetailsFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CharactersFragment : Fragment(R.layout.fragment_characters) {
+class CharactersFragment : Fragment(R.layout.fragment_characters),
+    CharacterAdapter.CharacterClickListener {
 
     private val viewBinding by viewBinding(FragmentCharactersBinding::bind)
     private val viewModel: CharactersViewModel by viewModels()
@@ -32,25 +33,26 @@ class CharactersFragment : Fragment(R.layout.fragment_characters) {
         with(viewBinding) {
             rvCharacters.adapter = adapter.withLoadStateFooter(CharacterLoaderStateAdapter())
 
+            adapter.characterClickListener = this@CharactersFragment
             adapter.addLoadStateListener { state ->
                 rvCharacters.isVisible = state.refresh != LoadState.Loading
                 progress.isVisible = state.refresh == LoadState.Loading
-
-                showErrorSnackbar(state = state, action = {
-                    adapter.retry()
-                })
+                showErrorSnackbar(state) { adapter.retry() }
             }
         }
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.characters.collectLatest(adapter::submitData)
-            }
+        launchOnLifecycleScope {
+            viewModel.characters.collectLatest(adapter::submitData)
         }
-
-        viewModel.fetchCharacters()
 
     }
 
+    override fun onCharacterClicked(character: Character) {
+        val args = CharacterDetailsFragmentArgs(character.id)
+        findNavController().navigate(
+            R.id.action_CharactersFragment_to_CharacterDetailsFragment,
+            args.toBundle()
+        )
+    }
 
 }

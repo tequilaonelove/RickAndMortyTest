@@ -1,14 +1,12 @@
 package com.example.rickandmortytest.di
 
-import android.content.Context
-import coil.ImageLoader
 import com.example.rickandmortytest.data.network.CharacterService
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -19,7 +17,7 @@ import javax.inject.Singleton
 @[Module InstallIn(SingletonComponent::class)]
 internal object AppModule {
 
-    val MIMETYPE_JSON = "application/json".toMediaType()
+    private val MIMETYPE_JSON = "application/json".toMediaType()
 
     @[Provides Singleton]
     fun provideJson(): Json {
@@ -35,6 +33,7 @@ internal object AppModule {
         return logging
     }
 
+    @ExperimentalSerializationApi
     @[Provides Singleton]
     fun provideCharacterService(json: Json, loggingInterceptor: HttpLoggingInterceptor): CharacterService {
         val httpClient = OkHttpClient.Builder()
@@ -50,8 +49,4 @@ internal object AppModule {
         return retrofit.create(CharacterService::class.java)
     }
 
-    @[Provides Singleton]
-    fun provideImageLoader(@ApplicationContext context: Context): ImageLoader {
-        return ImageLoader(context)
-    }
 }

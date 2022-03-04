@@ -8,7 +8,8 @@
     <fragment
         android:id="@+id/CharactersFragment"
         android:name="com.example.rickandmortytest.ui.characters.CharactersFragment"
-        android:label="Characters">
+        android:label="@string/characters_title"
+        tools:layout="@layout/fragment_characters">
         <action
             android:id="@+id/action_CharactersFragment_to_CharacterDetailsFragment"
             app:destination="@id/CharacterDetailsFragment" />
@@ -17,7 +18,8 @@
     <fragment
         android:id="@+id/CharacterDetailsFragment"
         android:name="com.example.rickandmortytest.ui.details.CharacterDetailsFragment"
-        android:label="Character Details">
+        android:label="@string/characters_details_title"
+        tools:layout="@layout/fragment_details">
         <action
             android:id="@+id/action_CharacterDetailsFragment_to_EpisodesFragment"
             app:destination="@id/EpisodesFragment" />
@@ -29,7 +31,8 @@
     <fragment
         android:id="@+id/EpisodesFragment"
         android:name="com.example.rickandmortytest.ui.episodes.EpisodesFragment"
-        android:label="Episodes">
+        android:label="@string/episodes_title"
+        tools:layout="@layout/fragment_episodes">
         <argument
             android:name="id"
             app:argType="integer" />

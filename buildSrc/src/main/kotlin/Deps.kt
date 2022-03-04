@@ -15,7 +15,6 @@ object Deps {
             const val APP_COMPAT = "1.4.1"
             const val ACTIVITY_KTX = "1.4.0"
             const val FRAGMENT_KTX = "1.4.1"
-            const val PREFERENCE_KTX = "1.2.0"
             const val CONSTRAINT_LAYOUT = "2.1.3"
             const val CARDVIEW = "1.0.0"
             const val RECYCLERVIEW = "1.2.1"
@@ -25,13 +24,8 @@ object Deps {
         }
 
         const val VIEWBINDING_PROPERTYDELEGATE = "1.5.3"
-
         const val LEAK_CANARY = "2.8.1"
         const val GLIDE = "4.13.0"
-        const val COIL = "1.4.0"
-        const val ROUNDED_IMAGE_VIEW ="2.3.0"
-        const val BLUR_SHADOW_IMAGEVIEW = "2.1"
-        const val FIT_BUTTON = "2.0.0"
         const val MATERIAL_ANDROID = "1.5.0"
         const val KOTLINX_SERIALIZATION = "1.3.2"
         const val COROUTINES_ANDROID = "1.6.0"
@@ -49,8 +43,9 @@ object Deps {
 
     }
 
-    const val COIL = "io.coil-kt:coil:${Versions.COIL}"
-    const val FIT_BUTTON = "io.github.nikartm:fit-button:${Versions.FIT_BUTTON}"
+    const val GLIDE = "com.github.bumptech.glide:glide:${Versions.GLIDE}"
+    const val GLIDE_COMPILER = "com.github.bumptech.glide:compiler:${Versions.GLIDE}"
+
     const val LEAK_CANARY = "com.squareup.leakcanary:leakcanary-android:${Versions.LEAK_CANARY}"
 
     const val HILT = "com.google.dagger:hilt-android:${Versions.HILT}"

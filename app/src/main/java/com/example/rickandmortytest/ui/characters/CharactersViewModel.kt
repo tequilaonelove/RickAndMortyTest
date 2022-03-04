@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.ui.characters
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -8,7 +9,7 @@ import androidx.paging.cachedIn
 import com.example.rickandmortytest.data.model.Character
 import com.example.rickandmortytest.data.network.CharacterPagingSource
 import com.example.rickandmortytest.data.network.CharacterService
-import com.example.rickandmortytest.extensions.BaseViewModel
+import com.example.rickandmortytest.extensions.launchAsync
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,13 +17,17 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class CharactersViewModel @Inject constructor(
+class CharactersViewModel @Inject internal constructor(
     private val characterPagingSource: CharacterPagingSource
-) : BaseViewModel() {
+) : ViewModel() {
 
     private lateinit var _charactersFlow: Flow<PagingData<Character>>
-    val characters: Flow<PagingData<Character>>
+    val characters
         get() = _charactersFlow
+
+    init {
+        getCharacters()
+    }
 
     private fun getPager(): Pager<Int, Character> {
         return Pager(
@@ -34,13 +39,11 @@ class CharactersViewModel @Inject constructor(
         )
     }
 
-    fun fetchCharacters() = launchPagingAsync({
+    fun getCharacters() = launchAsync({
         getPager().flow
     }, onSuccess = { flow ->
         _charactersFlow = flow
             .cachedIn(viewModelScope)
             .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
-    }, onError = {
-
     })
 }

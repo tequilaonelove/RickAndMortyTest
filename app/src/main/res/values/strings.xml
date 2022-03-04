@@ -2,4 +2,8 @@
     <string name="app_name">Rick And Morty App</string>
     <string name="error_message_retry_again_later">Произошла ошибка, попробуйте позже</string>
     <string name="retry_text">Повторить</string>
+    <string name="characters_title">Все персонажи</string>
+    <string name="characters_details_title">О персонаже</string>
+    <string name="episodes_title">Серии</string>
+    <string name="title_list_episodes">Список эпизодов</string>
 </resources>
